@@ -127,7 +127,7 @@ namespace Lesson_3___Animation
                 randomXValue = generator.Next(0, 700);
                 tribbleOrangeRect = new Rectangle(randomXValue, -100, 100, 100);
             }
-
+             
 
             base.Update(gameTime);
         }
