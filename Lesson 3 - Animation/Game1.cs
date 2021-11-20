@@ -32,6 +32,14 @@ namespace Lesson_3___Animation
         Rectangle tribbleOrangeRect;
         Vector2 tribbleOrangeSpeed;
 
+        Texture2D appleTexture;
+        Rectangle appleRect;
+        Vector2 appleSpeed;
+
+        Texture2D appleDoubleTexture;
+        Rectangle appleDoubleRect;
+        Vector2 appleDoubleSpeed;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -44,8 +52,8 @@ namespace Lesson_3___Animation
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth);
-            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight);
+            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth - 100);
+            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight - 100);
             tribbleGreyRect = new Rectangle(randomXValue, randomYValue, 100, 100);
             tribbleGreySpeed = new Vector2(8, 1);
 
@@ -58,10 +66,16 @@ namespace Lesson_3___Animation
             tribbleBrownRect = new Rectangle(randomXValue, randomYValue, 100, 100);
             tribbleBrownSpeed = new Vector2(2, 10);
 
-            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth);
+            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth - 100);
             randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight);
             tribbleOrangeRect = new Rectangle(randomXValue, randomYValue, 100, 100);
             tribbleOrangeSpeed = new Vector2(12, 7);
+
+            appleRect = new Rectangle(500, 350, 100, 100);
+            appleSpeed = new Vector2(5, 7);
+
+            appleDoubleRect = new Rectangle(-100, -100, 100, 100);
+            appleDoubleSpeed = new Vector2(5, 7);
 
             base.Initialize();
         }
@@ -78,6 +92,10 @@ namespace Lesson_3___Animation
             tribbleBrownTexture = Content.Load<Texture2D>("tribbleBrown");
 
             tribbleOrangeTexture = Content.Load<Texture2D>("tribbleOrange");
+
+            appleTexture = Content.Load<Texture2D>("apple");
+
+            appleDoubleTexture = Content.Load<Texture2D>("apple");
         }
 
         protected override void Update(GameTime gameTime)
@@ -127,7 +145,21 @@ namespace Lesson_3___Animation
                 randomXValue = generator.Next(0, 700);
                 tribbleOrangeRect = new Rectangle(randomXValue, -100, 100, 100);
             }
-             
+
+            appleRect.X += (int)appleSpeed.X;
+            appleDoubleRect.X += (int)appleDoubleSpeed.X;
+            if (appleRect.Right == 800)
+            {
+                appleDoubleRect = new Rectangle(-100, 350, 100, 100);
+
+            }
+
+            if (appleDoubleRect.Right == 800)
+            {
+                appleRect = new Rectangle(-100, 350, 100, 100);
+
+            }
+
 
             base.Update(gameTime);
         }
@@ -143,6 +175,8 @@ namespace Lesson_3___Animation
             _spriteBatch.Draw(tribbleCreamTexture, tribbleCreamRect, Color.White);
             _spriteBatch.Draw(tribbleBrownTexture, tribbleBrownRect, Color.White);
             _spriteBatch.Draw(tribbleOrangeTexture, tribbleOrangeRect, Color.White);
+            _spriteBatch.Draw(appleTexture, appleRect, Color.White);
+            _spriteBatch.Draw(appleDoubleTexture, appleDoubleRect, Color.White);
 
             _spriteBatch.End();
 
