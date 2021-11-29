@@ -72,10 +72,10 @@ namespace Lesson_3___Animation
             tribbleOrangeSpeed = new Vector2(12, 7);
 
             appleRect = new Rectangle(500, 350, 100, 100);
-            appleSpeed = new Vector2(5, 7);
+            appleSpeed = new Vector2(2, 7);
 
             appleDoubleRect = new Rectangle(-100, -100, 100, 100);
-            appleDoubleSpeed = new Vector2(5, 7);
+            appleDoubleSpeed = new Vector2(2, 7);
 
             base.Initialize();
         }
