@@ -34,5 +34,16 @@ namespace Lesson_3___Animation
         {
             _rectangle.Offset(_speed);
         }
-}
+
+        public void BounceLeftRight()
+        {
+            _speed.X *= -1;
+        }
+
+        public void BounceTopBottom()
+        {
+            _speed.Y *= -1;
+        }
+
+    }
 }

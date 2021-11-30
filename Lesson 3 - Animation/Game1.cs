@@ -16,21 +16,13 @@ namespace Lesson_3___Animation
         int randomSize;
         int randomSpeed;
 
+
+
         Texture2D tribbleGreyTexture;
-        Rectangle tribbleGreyRect;
-        Vector2 tribbleGreySpeed;
-
         Texture2D tribbleCreamTexture;
-        Rectangle tribbleCreamRect;
-        Vector2 tribbleCreamSpeed;
-
         Texture2D tribbleBrownTexture;
-        Rectangle tribbleBrownRect;
-        Vector2 tribbleBrownSpeed;
-
         Texture2D tribbleOrangeTexture;
-        Rectangle tribbleOrangeRect;
-        Vector2 tribbleOrangeSpeed;
+        Tribble greyTribble, orangeTribble, creamTribble, brownTribble;
 
         Texture2D appleTexture;
         Rectangle appleRect;
@@ -52,24 +44,14 @@ namespace Lesson_3___Animation
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth - 100);
-            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight - 100);
-            tribbleGreyRect = new Rectangle(randomXValue, randomYValue, 100, 100);
-            tribbleGreySpeed = new Vector2(8, 1);
+            
+            
 
-            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth);
-            tribbleCreamRect = new Rectangle(randomXValue, 90, 100, 100);
-            tribbleCreamSpeed = new Vector2(2, 1);
+            
 
-            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth);
-            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight);
-            tribbleBrownRect = new Rectangle(randomXValue, randomYValue, 100, 100);
-            tribbleBrownSpeed = new Vector2(2, 10);
+            
 
-            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth - 100);
-            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight);
-            tribbleOrangeRect = new Rectangle(randomXValue, randomYValue, 100, 100);
-            tribbleOrangeSpeed = new Vector2(12, 7);
+            
 
             appleRect = new Rectangle(500, 350, 100, 100);
             appleSpeed = new Vector2(2, 7);
@@ -78,6 +60,20 @@ namespace Lesson_3___Animation
             appleDoubleSpeed = new Vector2(2, 7);
 
             base.Initialize();
+            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth - 100);
+            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight - 100);
+            greyTribble = new Tribble(tribbleGreyTexture, new Rectangle(randomXValue, randomYValue, 100, 100), new Vector2(8, 1));
+
+            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth);
+            creamTribble = new Tribble(tribbleCreamTexture, new Rectangle(randomXValue, 90, 100, 100), new Vector2(2, 1));
+
+            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth);
+            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight);
+            brownTribble = new Tribble(tribbleBrownTexture, new Rectangle(randomXValue, randomYValue, 100, 100), new Vector2(2, 10));
+
+            randomXValue = generator.Next(0, _graphics.PreferredBackBufferWidth - 100);
+            randomYValue = generator.Next(0, _graphics.PreferredBackBufferHeight);
+            orangeTribble = new Tribble(tribbleOrangeTexture, new Rectangle(randomXValue, randomYValue, 100, 100), new Vector2(12, 7));
         }
 
         protected override void LoadContent()
@@ -104,46 +100,45 @@ namespace Lesson_3___Animation
                 Exit();
 
             // TODO: Add your update logic here
-            tribbleGreyRect.X += (int)tribbleGreySpeed.X;
-            if (tribbleGreyRect.Right > _graphics.PreferredBackBufferWidth || tribbleGreyRect.Left < 0)
-                tribbleGreySpeed.X *= -1;
 
-            tribbleGreyRect.Y += (int)tribbleGreySpeed.Y;
-            if (tribbleGreyRect.Top < 0 || tribbleGreyRect.Bottom > _graphics.PreferredBackBufferHeight)
-                tribbleGreySpeed.Y *= -1;
-
-
-            tribbleCreamRect.X += (int)tribbleCreamSpeed.X;
-            if (tribbleCreamRect.Right > 900)
+            greyTribble.Move();
+            if (greyTribble.Bounds.Top < 0 || greyTribble.Bounds.Bottom > _graphics.PreferredBackBufferHeight)
             {
-                tribbleCreamSpeed.X = tribbleCreamSpeed.X + 1;
-                if (tribbleCreamSpeed.X == 900)
-                {
-                    tribbleCreamSpeed.X = tribbleCreamSpeed.X = 1;
-                }
-                tribbleCreamRect = new Rectangle(-100 , 90, 100, 100);
+                greyTribble.BounceTopBottom();
             }
-                
-
-            tribbleBrownRect.Y += (int)tribbleBrownSpeed.Y;
-            if (tribbleBrownRect.Bottom > 900)
+            if (greyTribble.Bounds.Left < 0 || greyTribble.Bounds.Right > _graphics.PreferredBackBufferWidth)
             {
-                randomXValue = generator.Next(0, 700);
-                randomSize = generator.Next(5, 300);
-                tribbleBrownRect = new Rectangle(randomXValue, -300, randomSize, randomSize);
+                greyTribble.BounceLeftRight();
             }
 
-            tribbleOrangeRect.X += (int)tribbleOrangeSpeed.X;
-            if (tribbleOrangeRect.Right > _graphics.PreferredBackBufferWidth || tribbleOrangeRect.Left < 0)
-                tribbleOrangeSpeed.X *= -1;
-
-            tribbleOrangeRect.Y += (int)tribbleOrangeSpeed.Y;
-            if (tribbleOrangeRect.Bottom > 900)
+            creamTribble.Move();
+            if (creamTribble.Bounds.Top < 0 || creamTribble.Bounds.Bottom > _graphics.PreferredBackBufferHeight)
             {
-                randomSpeed = generator.Next(2, 100);
-                tribbleOrangeSpeed.Y = tribbleOrangeSpeed.Y = randomSpeed;
-                randomXValue = generator.Next(0, 700);
-                tribbleOrangeRect = new Rectangle(randomXValue, -100, 100, 100);
+                creamTribble.BounceTopBottom();
+            }
+            if (creamTribble.Bounds.Left < 0 || creamTribble.Bounds.Right > _graphics.PreferredBackBufferWidth)
+            {
+                creamTribble.BounceLeftRight();
+            }
+
+            brownTribble.Move();
+            if (brownTribble.Bounds.Top < 0 || brownTribble.Bounds.Bottom > _graphics.PreferredBackBufferHeight)
+            {
+                brownTribble.BounceTopBottom();
+            }
+            if (brownTribble.Bounds.Left < 0 || brownTribble.Bounds.Right > _graphics.PreferredBackBufferWidth)
+            {
+                brownTribble.BounceLeftRight();
+            }
+
+            orangeTribble.Move();
+            if (orangeTribble.Bounds.Top < 0 || orangeTribble.Bounds.Bottom > _graphics.PreferredBackBufferHeight)
+            {
+                orangeTribble.BounceTopBottom();
+            }
+            if (orangeTribble.Bounds.Left < 0 || orangeTribble.Bounds.Right > _graphics.PreferredBackBufferWidth)
+            {
+                orangeTribble.BounceLeftRight();
             }
 
             appleRect.X += (int)appleSpeed.X;
@@ -171,10 +166,10 @@ namespace Lesson_3___Animation
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(tribbleGreyTexture, tribbleGreyRect, Color.White);
-            _spriteBatch.Draw(tribbleCreamTexture, tribbleCreamRect, Color.White);
-            _spriteBatch.Draw(tribbleBrownTexture, tribbleBrownRect, Color.White);
-            _spriteBatch.Draw(tribbleOrangeTexture, tribbleOrangeRect, Color.White);
+            _spriteBatch.Draw(greyTribble.Texture, greyTribble.Bounds, Color.White);
+            _spriteBatch.Draw(creamTribble.Texture, creamTribble.Bounds, Color.White);
+            _spriteBatch.Draw(brownTribble.Texture, brownTribble.Bounds, Color.White);
+            _spriteBatch.Draw(orangeTribble.Texture, orangeTribble.Bounds, Color.White);
             _spriteBatch.Draw(appleTexture, appleRect, Color.White);
             _spriteBatch.Draw(appleDoubleTexture, appleDoubleRect, Color.White);
 
