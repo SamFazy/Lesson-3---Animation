@@ -17,7 +17,6 @@ namespace Lesson_3___Animation
         int randomSpeed;
 
 
-
         Texture2D tribbleGreyTexture;
         Texture2D tribbleCreamTexture;
         Texture2D tribbleBrownTexture;
@@ -44,13 +43,6 @@ namespace Lesson_3___Animation
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
-            
-
-            
-
-            
-
             
 
             appleRect = new Rectangle(500, 350, 100, 100);
@@ -176,6 +168,10 @@ namespace Lesson_3___Animation
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
+            // I had 7 tribbles all appearing in random locations with random speed bouncing around the screen makung the coo sound. 
+            // I also lost the Intro screen work.
+            // Everything was functioning normally with no bugs.
         }
     }
 }
